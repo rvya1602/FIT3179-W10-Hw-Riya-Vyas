@@ -1,0 +1,183 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Migrant Jobs by Industry",
+        "fontSize": 20,
+        "fontWeight": "bold"
+    },
+    "width": 500,
+    "height": 400,
+    "data": {
+        "url": "../data/migrant_jobs_by_industry.csv"
+    },
+    "params": [
+        {
+            "name": "IndustrySelect",
+            "value": null,
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "Agriculture, Forestry and Fishing",
+                    "Mining",
+                    "Manufacturing",
+                    "Electricity, Gas, Water and Waste Services",
+                    "Construction",
+                    "Wholesale Trade",
+                    "Retail Trade",
+                    "Accommodation and Food Services",
+                    "Transport, Postal and Warehousing",
+                    "Information Media and Telecommunications",
+                    "Financial and Insurance Services",
+                    "Rental, Hiring and Real Estate Services",
+                    "Professional, Scientific and Technical Services",
+                    "Administrative and Support Services",
+                    "Public Administration and Safety",
+                    "Education and Training",
+                    "Health Care and Social Assistance",
+                    "Arts and Recreation Services",
+                    "Other Services"
+                ],
+                "labels": [
+                    "Show All",
+                    "Agriculture, Forestry and Fishing",
+                    "Mining",
+                    "Manufacturing",
+                    "Electricity, Gas, Water and Waste Services",
+                    "Construction",
+                    "Wholesale Trade",
+                    "Retail Trade",
+                    "Accommodation and Food Services",
+                    "Transport, Postal and Warehousing",
+                    "Information Media and Telecommunications",
+                    "Financial and Insurance Services",
+                    "Rental, Hiring and Real Estate Services",
+                    "Professional, Scientific and Technical Services",
+                    "Administrative and Support Services",
+                    "Public Administration and Safety",
+                    "Education and Training",
+                    "Health Care and Social Assistance",
+                    "Arts and Recreation Services",
+                    "Other Services"
+                ],
+                "name": "Industry Selection: "
+            }
+        }
+    ],
+    "layer": [
+        {
+            "mark": "bar",
+            "encoding": {
+                "x": {
+                    "field": "Percentage",
+                    "type": "quantitative",
+                    "title": "Percentage (%)",
+                    "axis": {
+                        "titleFontSize": 16,
+                        "titleFontWeight": "bold",
+                        "titleColor": "#333"
+                    }
+                },
+                "y": {
+                    "field": "Industry",
+                    "type": "nominal",
+                    "sort": "-x",
+                    "title": "Industry",
+                    "axis": {
+                        "titleFontSize": 16,
+                        "titleFontWeight": "bold",
+                        "titleColor": "#333"
+                    }
+                },
+                "color": {
+                    "value": "#d3d3d3"
+                },
+                "opacity": {
+                    "value": 0.4
+                },
+                "tooltip": [
+                    {
+                        "field": "Industry",
+                        "type": "nominal",
+                        "title": "Industry"
+                    },
+                    {
+                        "field": "Percentage",
+                        "type": "quantitative",
+                        "title": "Percentage (%)",
+                        "format": ".1f"
+                    }
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "bar",
+                "tooltip": true
+            },
+            "encoding": {
+                "x": {
+                    "field": "Percentage",
+                    "type": "quantitative"
+                },
+                "y": {
+                    "field": "Industry",
+                    "type": "nominal",
+                    "sort": "-x"
+                },
+                "color": {
+                    "condition": {
+                        "test": "IndustrySelect === null || datum.Industry === IndustrySelect",
+                        "value": "#007bff"
+                    },
+                    "value": "#d3d3d3"
+                },
+                "opacity": {
+                    "condition": {
+                        "test": "IndustrySelect === null || datum.Industry === IndustrySelect",
+                        "value": 1
+                    },
+                    "value": 0.4
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "bottom",
+                "dx": 3,
+                "dy": 3
+            },
+            "encoding": {
+                "x": {
+                    "field": "Percentage",
+                    "type": "quantitative"
+                },
+                "y": {
+                    "field": "Industry",
+                    "type": "nominal",
+                    "sort": "-x"
+                },
+                "text": {
+                    "field": "percentLabel",
+                    "type": "nominal"
+                    
+                },
+                "color": {
+                    "condition": {
+                        "test": "IndustrySelect === null || datum.Industry === IndustrySelect",
+                        "value": "#000"
+                    },
+                    "value": "#888"
+                }
+            },
+            "transform": [
+                {
+                    "calculate": "datum.Percentage + '%'",
+                    "as": "percentLabel"
+                }
+            ]
+        }
+    ]
+}
