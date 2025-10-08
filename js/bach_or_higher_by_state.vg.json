@@ -1,0 +1,69 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 600,
+    "title": {
+        "text": "Percent of Population with Bachelor or Higher by State",
+        "fontSize": 18,
+        "fontWeight": "bold"
+    },
+    "data": {
+        "url": "STE_2016_AUST.json",
+        "format": {
+            "type": "topojson",
+            "feature": "STE_2016_AUST"
+        }
+    },
+    "transform": [
+        {
+            "lookup": "properties.STE_NAME16",
+            "from": {
+                "data": {
+                    "url": "../data/state_pop_15_or_above_bachelors_or_higher_percent.csv"
+                },
+                "key": "State",
+                "fields": [
+                    "Percent_Population",
+                    "Number_Population"
+                ]
+            }
+        }
+    ],
+    "projection": {
+        "type": "mercator"
+    },
+    "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1
+    },
+    "encoding": {
+        "color": {
+            "field": "Percent_Population",
+            "type": "quantitative",
+            "scale": {
+                "scheme": "blues"
+            },
+            "legend": {
+                "title": "% Population with Bachelor+"
+            }
+        },
+        "tooltip": [
+            {
+                "field": "properties.name",
+                "type": "nominal",
+                "title": "State"
+            },
+            {
+                "field": "Percent_Population",
+                "type": "quantitative",
+                "title": "% Bachelor+"
+            },
+            {
+                "field": "Number_Population",
+                "type": "quantitative",
+                "title": "Number of People"
+            }
+        ]
+    }
+}
