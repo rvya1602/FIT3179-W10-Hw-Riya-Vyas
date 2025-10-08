@@ -1,0 +1,192 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "International Students in Australia by Top 20 Countries of Origin (2024)",
+        "fontSize": 24,
+        "fontWeight": "bold"
+    },
+    "width": 500,
+    "height": 500,
+    "data": {
+        "url": "../data/international_students_by_cob_20.csv"
+    },
+    "params": [
+        {
+            "name": "CountrySelect",
+            "value": null,
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "China",
+                    "India",
+                    "Nepal",
+                    "Philippines",
+                    "Vietnam",
+                    "Colombia",
+                    "Indonesia",
+                    "Brazil",
+                    "Pakistan",
+                    "Thailand",
+                    "Sri Lanka",
+                    "Bangladesh",
+                    "Malaysia",
+                    "Korea, Republic of (South)",
+                    "Bhutan",
+                    "Hong Kong SAR",
+                    "Japan",
+                    "Taiwan",
+                    "Kenya",
+                    "United States of America"
+                ],
+                "labels": [
+                    "Show All",
+                    "China",
+                    "India",
+                    "Nepal",
+                    "Philippines",
+                    "Vietnam",
+                    "Colombia",
+                    "Indonesia",
+                    "Brazil",
+                    "Pakistan",
+                    "Thailand",
+                    "Sri Lanka",
+                    "Bangladesh",
+                    "Malaysia",
+                    "Korea, Republic of (South)",
+                    "Bhutan",
+                    "Hong Kong SAR",
+                    "Japan",
+                    "Taiwan",
+                    "Kenya",
+                    "United States of America"
+                ],
+                "name": "Country Selection: "
+            }
+        }
+    ],
+    "layer": [
+        {
+            "mark": "bar",
+            "encoding": {
+                "x": {
+                    "field": "No_Int_Students_2024",
+                    "type": "quantitative",
+                    "title": "Number of International Students",
+                    "axis": {
+                        "titleFontSize": 16,
+                        "titleFontWeight": "bold",
+                        "titleColor": "#333"
+                    }
+                },
+                "y": {
+                    "field": "Country",
+                    "type": "nominal",
+                    "sort": "none",
+                    "title": "Country",
+                    "axis": {
+                        "titleFontSize": 16,
+                        "titleFontWeight": "bold",
+                        "titleColor": "#333",
+                        "labelFontSize": 14 
+                    }
+                },
+                "color": {
+                    "value": "#d3d3d3"
+                },
+                "opacity": {
+                    "value": 0.4
+                },
+                "tooltip": [
+                    {
+                        "field": "Country",
+                        "type": "nominal",
+                        "title": "Country"
+                    },
+                    {
+                        "field": "No_Int_Students_2024",
+                        "type": "quantitative",
+                        "title": "Students",
+                        "format": ","
+                    }
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "bar",
+                "tooltip": true
+            },
+            "encoding": {
+                "x": {
+                    "field": "No_Int_Students_2024",
+                    "type": "quantitative",
+                    "scale": {
+                        "domain": [
+                            0,
+                            220000
+                        ]
+                    }
+                },
+                "y": {
+                    "field": "Country",
+                    "type": "nominal",
+                    "sort": "none"
+                },
+                "color": {
+                    "condition": {
+                        "test": "CountrySelect === null || datum.Country === CountrySelect",
+                        "value": "#007bff"
+                    },
+                    "value": "#d3d3d3"
+                },
+                "opacity": {
+                    "condition": {
+                        "test": "CountrySelect === null || datum.Country === CountrySelect",
+                        "value": 1
+                    },
+                    "value": 0.4
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "bottom",
+                "dx": 3,
+                "dy": 3,
+                "fontWeight": "bold" 
+            },
+            "encoding": {
+                "x": {
+                    "field": "No_Int_Students_2024",
+                    "type": "quantitative"
+                },
+                "y": {
+                    "field": "Country",
+                    "type": "nominal",
+                    "sort": "none"
+                },
+                "text": {
+                    "field": "studentLabel",
+                    "type": "nominal"
+                },
+                "color": {
+                    "condition": {
+                        "test": "CountrySelect === null || datum.Country === CountrySelect",
+                        "value": "#000"
+                    },
+                    "value": "#888"
+                }
+            },
+            "transform": [
+                {
+                    "calculate": "format(datum.No_Int_Students_2024, ',')",
+                    "as": "studentLabel"
+                }
+            ]
+        }
+    ]
+}
