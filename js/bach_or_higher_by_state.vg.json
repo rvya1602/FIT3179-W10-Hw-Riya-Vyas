@@ -27,6 +27,10 @@
                     "Number_Population"
                 ]
             }
+        },
+        {
+            "calculate": "datum.properties.STE_NAME16",
+            "as": "State_Name"
         }
     ],
     "projection": {
@@ -50,7 +54,7 @@
         },
         "tooltip": [
             {
-                "field": "properties.name",
+                "field": "State_Name",
                 "type": "nominal",
                 "title": "State"
             },
