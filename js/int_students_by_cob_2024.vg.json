@@ -2,11 +2,11 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": {
         "text": "International Students in Australia by Top 20 Countries of Origin (2024)",
-        "fontSize": 24,
+        "fontSize": 18,
         "fontWeight": "bold"
     },
-    "width": 500,
-    "height": 500,
+    "width": 400,
+    "height": 400,
     "data": {
         "url": "../data/international_students_by_cob_20.csv"
     },
@@ -89,7 +89,7 @@
                         "titleFontSize": 16,
                         "titleFontWeight": "bold",
                         "titleColor": "#333",
-                        "labelFontSize": 14 
+                        "labelFontSize": 12 
                     }
                 },
                 "color": {
