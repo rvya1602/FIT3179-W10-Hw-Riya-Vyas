@@ -8,7 +8,7 @@
     "width": 400,
     "height": 400,
     "data": {
-        "url": "/data/international_students_by_cob_20.csv"
+        "url": "data/international_students_by_cob_20.csv"
     },
     "params": [
         {
