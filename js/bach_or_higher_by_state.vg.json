@@ -49,7 +49,15 @@
                 "scheme": "blues"
             },
             "legend": {
-                "title": "% Population with Bachelor+"
+                "title": [
+                    "Percentage of Population",
+                    "with Bachelor's Degree",
+                    "or Higher"
+                ],
+                "titleFontSize": 14,
+                "titleFontWeight": "bold",
+                "labelFontSize": 12,
+                "orient": "right"
             }
         },
         "tooltip": [
@@ -61,12 +69,14 @@
             {
                 "field": "Percent_Population",
                 "type": "quantitative",
-                "title": "% Bachelor+"
+                "title": "Bachelor’s or Higher (Pop. %)",
+                "format": ".1f"
             },
             {
                 "field": "Number_Population",
                 "type": "quantitative",
-                "title": "Number of People"
+                "title": "Number of People",
+                "format": ","
             }
         ]
     }
